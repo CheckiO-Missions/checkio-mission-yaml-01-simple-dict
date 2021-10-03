@@ -43,7 +43,7 @@ age: 12"""],
         },
         {
             "input": ["""12: 12"""],
-            "answer": {"12": 12},
+            "answer": {12: 12},
             "explanation": 'Key can be int'
         },
         {
