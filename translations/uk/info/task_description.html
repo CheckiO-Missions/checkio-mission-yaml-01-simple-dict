@@ -1,0 +1,74 @@
+<!-- Describe task in general -->
+
+<p>
+    Тобі відома така мову розмітки, як <a target="_blank" href="https://yaml.org/">YAML</a>?  Це дружній формат представлення даних. Насправді, він настільки дружній, що і люди, і програми можуть його читати досить добре. Ти можеш дізнатися більше про формат за <a target="_blank" href="https://yaml-online-parser.appspot.com/">цим посиланням</a>.
+</p>
+
+ <p>YAML це текст, і тобі потрібно перетворити його на об'єкт. Але я не прошу тебе реалізувати весь стандарт YAML, ми реалізуємо його поетапно.</p>
+
+ <p>Перший крок - це перетворення пар ключів-значень. Ключем може бути будь-який рядок, що складається з латинських літер та чисел. Значення може бути однолінійний рядок (який складається з пробілів, латинських літер та чисел) або числа (<b class="code">{% if is_js %}Number{% else %}int{% endif %}</b>).</p>
+
+ <p>Я покажу кілька прикладів:</p>
+
+<pre>
+name: Alex
+age: 12
+</pre>
+
+ <p>Перетворюється на {% if is_js %}об'єкт{% else %}словник{% endif %}.</p>
+
+ <pre class="brush: python">
+{ 
+  "name": "Alex",
+  "age": 12
+} 
+ </pre>
+
+<p>Зауваж, що число автоматично отримує тип <b class="code">{% if is_js %}Number{% else %}int{% endif %}</b>.</p>
+
+<p>Інший приклад показує, що рядок може містити пробіли.<p>
+
+<pre>
+name: Alex Fox
+age: 12
+
+class: 12b
+</pre>
+
+<p>Буде конвертовано у наступний {% if is_js %}об'єкт{% else %}словник{% endif %}.</p>
+
+<pre class="brush: python">
+{
+  "age": 12, 
+  "name": "Alex Fox", 
+  "class": "12b"
+}
+</pre>
+
+<p>Зверни увагу на кілька речей. Між рядком <b class="code">"age"</b> і рядком <b class="code">"class"</b> є порожній рядок, який не заважає конвертації. <b class="code">"class"</b> починається з числа, але має літери, а це означає, що його не можна перетворити на число, тому його тип залишається <b class="code">{% if is_js %}String{% else %}str{% endif %}</b>.</p>
+
+<!-- Explain input and output values -->
+<p>
+    <strong>Вхідні дані:</strong> Форматований рядок. 
+</p>
+
+<p>
+    <strong>Вихідні дані:</strong> об'єкт ({% if is_js %}тип Object{% else %}словник{% endif %}). 
+</p>
+
+
+<!-- Give some usage examples -->
+<div class="for_info_only">
+    <p>
+        <strong>Приклади:</strong>
+    </p>
+    <pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
+</div>
+
+
+<!-- Here you can explain some constraints for input-->
+<!-- The section is optional -->
+<p>
+    <strong>Передумова:</strong>
+    <i>Використовується YAML 1.2 з <a target="_blank" href="https://yaml.org/spec/1.2/spec.html#id2803231">JSON Schema</a>.</i>
+</p>
