@@ -1,0 +1,74 @@
+<!-- Describe task in general -->
+
+<p>
+    Haben Sie schon einmal von einer Auszeichnungssprache wie <a target="_blank" href="https://yaml.org/">YAML</a> gehört? Es handelt sich dabei um ein benutzerfreundliches Format zur Serialisierung von Daten. Es ist sogar so freundlich, dass sowohl Menschen als auch Programme es gut lesen können. Sie können mit dem Standard herumspielen, indem Sie <a target="_blank" href="https://yaml-online-parser.appspot.com/">this link</a> folgen.
+</p>
+
+ <p>YAML ist ein Text, den Sie in ein Objekt umwandeln müssen. Aber ich verlange nicht von Ihnen, dass Sie den gesamten YAML-Standard implementieren, wir werden ihn Schritt für Schritt implementieren.</p>
+
+ <p>Der erste Schritt ist die Umwandlung von Schlüsseln in Werte. Der Schlüssel kann eine beliebige Zeichenkette sein, die aus lateinischen Buchstaben und Zahlen besteht. Der Wert kann eine einzeilige Zeichenkette (die aus Leerzeichen, lateinischen Buchstaben und Zahlen besteht) oder eine Zahl sein (<b class="code">{% if is_js %}Number{% else %}int{% endif %}</b>).</p>
+
+ <p>Ich werde einige Beispiele zeigen:</p>
+
+<pre>
+name: Alex
+age: 12
+</pre>
+
+ <p>Umgewandelt in {% if is_js %}ein Objekt{% else %}ein Wörterbuch{% endif %}.</p>
+
+ <pre class="brush: python">
+{ 
+  "name": "Alex",
+  "age": 12
+} 
+ </pre>
+
+<p>Beachten Sie, dass die Zahl automatisch den Typ <b class="code">{% if is_js %}Number{% else %}int{% endif %}</b> erhält.</p>
+
+<p>Ein weiteres Beispiel zeigt, dass die Zeichenkette Leerzeichen enthalten kann.<p>
+
+<pre>
+name: Alex Fox
+age: 12
+
+class: 12b
+</pre>
+
+<p>Wird in das nächste {% if is_js %}Objekt{% else %}Wörterbuch{% endif %} umgewandelt.</p>
+
+<pre class="brush: python">
+{
+  "age": 12, 
+  "name": "Alex Fox", 
+  "class": "12b"
+}
+</pre>
+
+<p>Achten Sie auf ein paar Dinge. Zwischen der Zeichenkette <b class="code">"age"</b> und der Zeichenkette <b class="code">"class"</b> befindet sich eine leere Zeichenkette, die das Parsen nicht behindert. Die Klasse beginnt mit Zahlen, hat aber Buchstaben, was bedeutet, dass sie nicht in Zahlen umgewandelt werden kann, so dass ihr Typ <b class="code">{% if is_js %}String{% else %}str{% endif %}</b> bleibt.</p>
+
+<!-- Explain input and output values -->
+<p>
+   <strong>Eingabe:</strong> Eine Formatzeichenkette. 
+</p>
+
+<p>
+   <strong>Ausgabe:</strong> Ein Objekt ({% if is_js %}Objekttyp{% else %}Wörterbuch{% endif %}). 
+</p>
+
+
+<!-- Give some usage examples -->
+<div class="for_info_only">
+    <p>
+        <strong>Beispiele:</strong>
+    </p>
+    <pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
+</div>
+
+
+<!-- Here you can explain some constraints for input-->
+<!-- The section is optional -->
+<p>
+    <strong>Vorbedingung:</strong>
+    <i>YAML 1.2 wird mit <a target="_blank" href="https://yaml.org/spec/1.2/spec.html#id2803231">JSON Schema</a> verwendet.</i>
+</p>
